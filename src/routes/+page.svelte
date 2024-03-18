@@ -105,6 +105,10 @@
 	let page = 1;
 
 	let search = '';
+
+	// When you implement search or custom filtering it is important to handle situations where user can be on for example page 10, he searches for something
+	// and only 1 page become available. Page wont change automatically in this situation. Just add line as below to provide reactivity. Page is automatically calculated only when user change limit or page.
+	$: (page = 1), search;
 </script>
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">530RGE Table</h1>
