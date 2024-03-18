@@ -222,7 +222,7 @@
 </ul>
 
 <p class="self-center pb-6 italic ">
-	If you find the project interesting please feel free a star on <a
+	If you find the project interesting feel free to give a star on <a
 		href="https://github.com/530RGE/table">github</a
 	>. Thanks! ❤️
 </p>
