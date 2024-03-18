@@ -74,14 +74,14 @@
 				<div>
 					<slot />
 				</div>
-				<div class="flex flex-col gap-2 self-center font-medium w-full">
+				<div class="flex w-full flex-col gap-2 self-center font-medium">
 					<Separator />
 					<div class="flex flex-row gap-2 self-center">
 						<a href="https://discord.gg/QySYfxSTvJ">DISCORD</a> |
 						<a href="https://github.com/530RGE/table">GITHUB</a>
 					</div>
 					<p class="self-center">
-						530RGE {new Date().getFullYear()}
+						Sebastian "530RGE" Drozd {new Date().getFullYear()}
 					</p>
 				</div>
 			</div>

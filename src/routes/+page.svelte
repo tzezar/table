@@ -221,29 +221,8 @@
 	<li>Virtualization</li>
 </ul>
 
-<!-- @layer components {
-	.h1 {
-	  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
-	},
-	.h2 {
-	  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
-	},
-	.h3 {
-	  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
-	},
-	.h4 {
-	  @apply scroll-m-20 text-xl font-semibold tracking-tight;
-	},
-	.p {
-	  @apply leading-7 [&:not(:first-child)]:mt-6;
-	},
-	.ul {
-	  @apply my-6 ml-6 list-disc [&>li]:mt-2;
-	},
-	.lead {
-	  @apply text-xl text-muted-foreground;
-	},
-	.muted {
-	  @apply text-sm text-muted-foreground;
-	}
-  } -->
+<p class="self-center pb-6 italic ">
+	If you find the project interesting please feel free a star on <a
+		href="https://github.com/530RGE/table">github</a
+	>. Thanks! ❤️
+</p>
