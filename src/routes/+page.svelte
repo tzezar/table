@@ -155,7 +155,7 @@
 	</div>
 </Table>
 
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">For whom?</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight pt-6">For whom?</h4>
 <p class="pb-6 leading-7">
 	The component handles data from the server. It's easy to extend with additional features, styling
 	shouldn't be difficult either. Use it if you already use shadcn-svelte and tailwind.
