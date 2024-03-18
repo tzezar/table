@@ -6,20 +6,28 @@
 	// Client-side pagination is not implemented yet
 
 	$: query = createQuery({
-		queryKey: ['products'],
+		queryKey: ['products', page, perPage],
 		queryFn: async () => {
-			return await fetch('https://dummyjson.com/products').then((res) => res.json());
+			return await fetch(
+				`https://dummyjson.com/products?limit=${perPage}&skip=${page * perPage - perPage}`
+			).then((res) => res.json());
+		},
+		placeholderData: (): Response => {
+			return $query?.data || { limit: 10, skip: 0, total: 1, products: [] };
 		}
 	});
 
 	let columns: Columns = [
 		{ accessor: 'id', header: 'Id' },
-		{ accessor: 'title', header: 'Title',
+		{
+			accessor: 'title',
+			header: 'Title',
 			config: {
 				size: {
 					w: 200
 				}
-			} },
+			}
+		},
 		{
 			accessor: 'description',
 			header: 'Description',
@@ -45,9 +53,9 @@
 
 <Table
 	{columns}
-	data={$query?.data?.products}
+	data={$query?.data?.products || []}
 	enablePagination
-	count={$query.data?.total}
+	count={$query.data?.total || 1}
 	bind:perPage
 	bind:page
 />

@@ -14,6 +14,7 @@
 	} = ctx;
 
 	const treeItems = [
+		{ title: 'Home', link: '/' },
 		{ title: 'Basic', link: '/basic' },
 		{ title: 'Column resizing', link: '/column-resizing' },
 		{ title: 'Column ordering', link: '/column-ordering' },
