@@ -154,6 +154,7 @@
 		<ExpandableRow {props} />
 	</div>
 </Table>
+<p class='text-foreground/50 text-right'>Sorting is not working in the example because dummyjson.com does not support it</p>
 
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight pt-6">For whom?</h4>
 <p class="pb-6 leading-7">

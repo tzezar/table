@@ -66,7 +66,7 @@
 </script>
 
 <Table {columns} data={$query?.data?.products} enableSorting bind:sorting />
-
+<p class='text-foreground/50 text-right'>Sorting is not working in the example because dummyjson.com does not support it</p>
 <code>
 	{$sorting.accessor}
 	{$sorting.direction}

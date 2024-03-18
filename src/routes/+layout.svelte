@@ -4,6 +4,7 @@
 	import Sidebar from './_components/Sidebar.svelte';
 	import '../app.pcss';
 
+
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
 
 	import { browser } from '$app/environment';
@@ -31,9 +32,7 @@
 	<div class="fixed h-full w-full">
 		<div class="header flex flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2">
 			<div class="flex w-full flex-row justify-between">
-
 				<a href="/">
-
 					<h1 class="text-4xl font-bold">530RGE TABLE</h1>
 				</a>
 
@@ -71,8 +70,19 @@
 			>
 				<Sidebar />
 			</div>
-			<div class="h-full min-h-full w-full overflow-auto p-2">
-				<slot />
+			<div class="flex h-full min-h-full w-full flex-col justify-between overflow-auto p-2">
+				<div>
+					<slot />
+				</div>
+				<div class="flex flex-col gap-2 self-center font-medium">
+					<div class="flex flex-row gap-2">
+						<a href="https://discord.gg/QySYfxSTvJ">DISCORD</a> |
+						<a href="https://github.com/530RGE/table">GITHUB</a>
+					</div>
+					<p class='self-center '>
+						530RGE {new Date().getFullYear()} 
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
