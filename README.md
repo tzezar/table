@@ -25,19 +25,6 @@ You copy the component directly into your project and can edit it as you wish. I
 - Row expanding
 - Single column sorting
 
-## Planned Functions
-- Client-side functionality
-- Virtualization
-- Fullscreen
-- Cell density
-
-## What is Not Supported at the Moment
-- Aggregation and grouping
-- Column pinning
-- Virtualization
-
-
-
 ## MIT License
 
 Copyright (c) 2024 Sebastian Drozd
