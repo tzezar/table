@@ -15,6 +15,7 @@
 
 	const treeItems = [
 		{ title: 'Home', link: '/' },
+		{ title: 'Installation', link: '/installation' },
 		{ title: 'Basic', link: '/basic' },
 		{ title: 'Column resizing', link: '/column-resizing' },
 		{ title: 'Column ordering', link: '/column-ordering' },
