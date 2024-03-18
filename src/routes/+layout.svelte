@@ -31,7 +31,7 @@
 	<div class="fixed h-full w-full">
 		<div class="header flex flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2">
 			<div class="flex w-full flex-row justify-between">
-				<h1 class="text-4xl font-bold">530RDE TABLE</h1>
+				<h1 class="text-4xl font-bold">530RGE TABLE</h1>
 
 				<div class="flex flex-row gap-2">
 					<Button on:click={toggleMode} class="">
