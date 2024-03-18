@@ -25,6 +25,12 @@ You copy the component directly into your project and can edit it as you wish. I
 - Row expanding
 - Single column sorting
 
+## Shortcuts
+[live examples](https://530rge-table.vercel.app/) 
+[installation](https://530rge-table.vercel.app/installation) 
+[component code](https://github.com/530RGE/table/tree/main/src/lib/components/table) 
+[examples code](https://github.com/530RGE/table/tree/main/src/routes/(examples)) 
+
 ## MIT License
 
 Copyright (c) 2024 Sebastian Drozd
