@@ -38,7 +38,7 @@ You copy the component directly into your project and can edit it as you wish. I
 
 
 
-MIT License
+## MIT License
 
 Copyright (c) 2024 Sebastian Drozd
 
