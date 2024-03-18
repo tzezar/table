@@ -29,4 +29,3 @@
 <!-- We must specify columns and data -->
 <Table {columns} data={$query?.data?.products} />
 
-

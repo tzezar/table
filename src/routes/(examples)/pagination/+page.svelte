@@ -60,9 +60,12 @@
 	bind:page
 />
 
+
 <div class="pt-2">
 	<h3 class="font-medium">Use these values to apply pagination to the server</h3>
 	<p>perPage: {perPage}</p>
 	<p>page: {page}</p>
 	<p>offset: {page * perPage - perPage}</p>
 </div>
+
+

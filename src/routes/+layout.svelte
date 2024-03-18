@@ -4,7 +4,6 @@
 	import Sidebar from './_components/Sidebar.svelte';
 	import '../app.pcss';
 
-
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
 
 	import { browser } from '$app/environment';
@@ -15,6 +14,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 	import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
+	import Separator from '$lib/components/ui/separator/separator.svelte';
 
 	let openStore = setContext('sidebar', writable(false));
 
@@ -74,13 +74,14 @@
 				<div>
 					<slot />
 				</div>
-				<div class="flex flex-col gap-2 self-center font-medium">
-					<div class="flex flex-row gap-2">
+				<div class="flex flex-col gap-2 self-center font-medium w-full">
+					<Separator />
+					<div class="flex flex-row gap-2 self-center">
 						<a href="https://discord.gg/QySYfxSTvJ">DISCORD</a> |
 						<a href="https://github.com/530RGE/table">GITHUB</a>
 					</div>
-					<p class='self-center '>
-						530RGE {new Date().getFullYear()} 
+					<p class="self-center">
+						530RGE {new Date().getFullYear()}
 					</p>
 				</div>
 			</div>

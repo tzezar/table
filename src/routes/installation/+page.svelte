@@ -1,4 +1,9 @@
+<script>
+	import Separator from "$lib/components/ui/separator/separator.svelte";
+
+</script>
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">Installation</h1>
+
 
 
 
@@ -67,4 +72,14 @@
 
 <p class="pb-6 leading-7">
 	mode-watches is easy way to implement dark mode, and tanstack-query is good for data fetching
+</p>
+
+
+
+<h4 class="scroll-m-20 pt-6 text-xl font-semibold tracking-tight">Code from examples</h4>
+<p class="pb-6 leading-7">
+	The code from the example as well as the annotations are available at <a
+		class="font-medium"
+		href="https://github.com/530RGE/table/blob/main/src/routes/">GITHUB</a
+	>
 </p>
