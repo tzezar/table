@@ -80,6 +80,6 @@
 <p class="pb-6 leading-7">
 	The code from the example as well as the annotations are available at <a
 		class="font-medium"
-		href="https://github.com/530RGE/table/blob/main/src/routes/">GITHUB</a
+		href="https://github.com/530RGE/table/tree/main/src/routes/(examples)">GITHUB</a
 	>
 </p>
