@@ -1,8 +1,7 @@
 <script lang="ts">
-	import * as Sheet from '$lib/components/ui/sheet';
-	import { Menu } from 'lucide-svelte';
-	import Sidebar from './_components/Sidebar.svelte';
 	import '../app.pcss';
+	import { Moon, Sun, Menu } from 'lucide-svelte';
+	import Sidebar from './_components/Sidebar.svelte';
 
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
 
@@ -10,8 +9,10 @@
 	import { writable } from 'svelte/store';
 	import { setContext } from 'svelte';
 
-	import { Moon, Sun } from 'lucide-svelte';
+	import * as Sheet from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button';
+	import { Toaster } from '$lib/components/ui/sonner';
+
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 	import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
@@ -28,6 +29,7 @@
 </script>
 
 <QueryClientProvider client={queryClient}>
+	<Toaster />
 	<ModeWatcher />
 	<div class="fixed h-full w-full">
 		<div class="header flex flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2">

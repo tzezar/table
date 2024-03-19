@@ -65,6 +65,7 @@
 		"mode-watcher": "^0.3.0",
 		"svelte-dnd-action": "^0.9.40",
 		"svelte-legos": "^0.2.2",
+		"svelte-sonner": "^0.3.19",
 		"tailwind-merge": "^2.2.2",
 		"tailwind-variants": "^0.2.1"
 	}
