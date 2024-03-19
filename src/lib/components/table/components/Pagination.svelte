@@ -11,10 +11,11 @@
 	$: siblingCount = $isDesktop ? 1 : 0;
 
 	let limits = [
-		{ value: 1, label: '1 row per page' },
-		{ value: 2, label: '2 rows per page' },
-		{ value: 3, label: '3 rows per page' },
-		{ value: 10, label: '10 rows per page' }
+		{ value: 5, label: '5 rows per page' },
+		{ value: 10, label: '10 rows per page' },
+		{ value: 25, label: '25 rows per page' },
+		{ value: 50, label: '50 rows per page' },
+		{ value: 100, label: '100 rows per page' },
 	];
 
 	export let count: number;
