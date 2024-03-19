@@ -20,6 +20,7 @@
 		{ title: 'Column resizing', link: '/column-resizing' },
 		{ title: 'Column ordering', link: '/column-ordering' },
 		{ title: 'Column hiding', link: '/column-hiding' },
+		{ title: 'Column filtering', link: '/column-filtering' },
 		{ title: 'Pagination', link: '/pagination' },
 		{ title: 'Sorting', link: '/sorting' },
 		{ title: 'Custom cells', link: '/custom-cells' },

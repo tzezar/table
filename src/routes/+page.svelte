@@ -11,6 +11,14 @@
 	import RatingCell from './_components/RatingCell.svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import * as Sheet from '$lib/components/ui/sheet';
+	import TitleHeaderCell from './_components/TitleHeaderCell.svelte';
+	import { writable } from 'svelte/store';
+
+	let search = writable('');
+	let selectedRows = createSelectedRowsStore([]);
+
+	let perPage = 10;
+	let page = 1;
 
 	let columns: Columns = [
 		{
@@ -55,12 +63,17 @@
 		{
 			accessor: 'title',
 			header: 'Name',
+			headerCell: TitleHeaderCell,
 			config: {
+				sortable: false,
 				size: {
-					w: 160,
+					w: 200,
 					minW: 60,
 					maxW: 200
 				}
+			},
+			extra: {
+				search
 			}
 		},
 		{
@@ -68,9 +81,9 @@
 			header: 'Description',
 			config: {
 				size: {
-					w: 200,
+					w: 300,
 					minW: 60,
-					maxW: 300
+					maxW: 500
 				}
 			}
 		},
@@ -88,10 +101,10 @@
 		}
 	];
 	$: query = createQuery({
-		queryKey: ['products', page, perPage, search],
+		queryKey: ['products', page, perPage, $search],
 		queryFn: async () => {
 			return await fetch(
-				`https://dummyjson.com/products/search?q=${search}&limit=${perPage}&skip=${page * perPage - perPage}`
+				`https://dummyjson.com/products/search?q=${$search}&limit=${perPage}&skip=${page * perPage - perPage}`
 			).then((res) => res.json());
 		},
 		placeholderData: (): Response => {
@@ -99,17 +112,11 @@
 		}
 	});
 
-	let selectedRows = createSelectedRowsStore([]);
-
-	let perPage = 10;
-	let page = 1;
-
-	let search = '';
-
 	// When you implement search or custom filtering it is important to handle situations where user can be on for example page 10, he searches for something
 	// and only 1 page become available. Page wont change automatically in this situation. Just add line as below to provide reactivity. Page is automatically calculated only when user change limit or page.
-	$: (page = 1), search;
+	$: (page = 1), $search;
 </script>
+
 
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">530RGE Table</h1>
 <h2
@@ -133,7 +140,7 @@
 >
 	<div slot="actions">
 		<div class="flex flex-row gap-2">
-			<Input bind:value={search} />
+			<Input bind:value={$search} />
 			<div>
 				<Sheet.Root>
 					<Sheet.Trigger>

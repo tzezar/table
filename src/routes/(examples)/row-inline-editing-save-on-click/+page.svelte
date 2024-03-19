@@ -11,6 +11,7 @@
 	import { toast } from 'svelte-sonner';
 	import SelectBrand from './_components/SelectBrand.svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
+	import { NotebookPen } from 'lucide-svelte';
 
 	type OnChangeProps = {
 		accessor: string;
@@ -154,7 +155,7 @@
 	)}
 </pre>
 
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight pt-6">Note</h4>
+<h4 class="scroll-m-20 pt-6 text-xl font-semibold tracking-tight flex flex-row gap-2"><NotebookPen/> Note</h4>
 <p class="pb-6 leading-7">
 	It is more common practice to save a row when clicking the save button than to edit cells directly
 	as in the previous example. The nature of the component is very flexible, in this example I will
