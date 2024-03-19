@@ -41,7 +41,7 @@
 			class="w-14"
 			on:click={() => {
 				// we add row to the store
-				$rows = [{ ...$rows, ...props.row }];
+				$rows = [{...props.row},  ...$rows];
 				inlineEditing.update((s) => [...s, rowId]);
 			}}>EDIT</Button
 		>

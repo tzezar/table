@@ -147,9 +147,7 @@
 <p class='pt-6'>Inline editing rows:</p>
 <pre class="max-h-[300px] overflow-auto">
 	 {JSON.stringify(
-		$rows.map((e) => {
-			return { brand: e.brand, price: e.price };
-		}),
+		$rows,
 		'',
 		2
 	)}
