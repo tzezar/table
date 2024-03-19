@@ -81,7 +81,7 @@
 		// Here you specify custom cell and handle logic inside it
 		{
 			accessor: 'brand',
-			header: 'Brande',
+			header: 'Brand',
 			config: {
 				size: {
 					w: 300

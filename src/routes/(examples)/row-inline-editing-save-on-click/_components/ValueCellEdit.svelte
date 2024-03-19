@@ -7,9 +7,8 @@
 <Input
 	name={props.column.accessor}
 	type="number"
-	rozmiar="tableCell"
 	value={props.value}
-	class="text-md rounded-none border-y-0 bg-none pl-0 pr-0"
+	class="text-md rounded-none border-y-0 bg-none h-full"
 	on:change={async (e) => {
 		props.column.extra.onChange({
 			value: +e.target.value,

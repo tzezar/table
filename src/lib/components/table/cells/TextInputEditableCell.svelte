@@ -6,9 +6,8 @@
 <Input
 	name={props.column.accessor}
 	type="text"
-	rozmiar="tableCell"
 	value={props.value}
-	class="rounded-none border-y-0 bg-none pr-0"
+	class="rounded-none border-y-0 bg-none pr-0 h-full "
 	on:change={(e) =>
 		props.column.extra.onChange({
 			value: e.target.value,

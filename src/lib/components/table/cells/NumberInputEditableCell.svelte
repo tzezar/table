@@ -7,7 +7,6 @@
 <Input
 	name={props.column.accessor}
 	type="number"
-	rozmiar="tableCell"
 	value={props.value}
 	class="bg-none pr-0 rounded-none border-y-0 pl-0 text-md"
 	on:change={(e) =>
