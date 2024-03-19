@@ -64,7 +64,7 @@
 
 <Table {columns} data={$query?.data?.products} bind:inlineEditing />
 
-<p>Inline editing rows:</p>
-<pre>
+<p class='pt-6'>Inline editing rows:</p>
+<pre class="max-h-[300px] overflow-auto">
 	 {JSON.stringify($inlineEditing, '', 2)}
 </pre>

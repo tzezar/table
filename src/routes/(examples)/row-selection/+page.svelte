@@ -71,7 +71,7 @@
 
 <Table {columns} data={$query?.data?.products} bind:selectedRows />
 
-<p>Selected rows:</p>
-<pre>
+<p class='pt-6'>Selected rows:</p>
+<pre class="max-h-[300px] overflow-auto">
 	 {JSON.stringify($selectedRows, '', 2)}
 </pre>

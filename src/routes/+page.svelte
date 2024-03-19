@@ -213,12 +213,11 @@
 	<li>Cell density</li>
 </ul>
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">
-	What is not supported at the moment
+	What wont be added soon
 </h4>
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">
 	<li>Aggregation and grouping</li>
 	<li>Column pinning</li>
-	<li>Virtualization</li>
 </ul>
 
 <p class="self-center pb-6 italic ">

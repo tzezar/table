@@ -69,7 +69,7 @@
 	</div>
 </Table>
 
-<p>Expanded rows:</p>
-<pre>
+<p class='pt-6'>Expanded rows:</p>
+<pre class="max-h-[300px] overflow-auto">
 	 {JSON.stringify($expandedRows, '', 2)}
 </pre>
