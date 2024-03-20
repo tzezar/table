@@ -2,7 +2,7 @@
 
 Table component built in svelte based on shadcn-svelte components.
 
-[documentation, examples and live demo](https://530rge-table.vercel.app/)
+[documentation, examples and live demo](https://tzezar-table.vercel.app/)
 
 ## What is this?
 Table component for easy display of tables based on remote data (planned support for client-side functionality).
@@ -26,10 +26,10 @@ You copy the component directly into your project and can edit it as you wish. I
 - Single column sorting
 
 ## Shortcuts
-[live examples](https://530rge-table.vercel.app/) 
-[installation](https://530rge-table.vercel.app/installation) 
-[component code](https://github.com/530RGE/table/tree/main/src/lib/components/table) 
-[examples code](https://github.com/530RGE/table/tree/main/src/routes/(examples)) 
+[live examples](https://tzezar-table.vercel.app/) 
+[installation](https://tzezar-table.vercel.app/installation) 
+[component code](https://github.com/tzezar/table/tree/main/src/lib/components/table) 
+[examples code](https://github.com/tzezar/table/tree/main/src/routes/(examples)) 
 
 ## MIT License
 
