@@ -117,8 +117,7 @@
 	$: (page = 1), $search;
 </script>
 
-
-<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">530RGE Table</h1>
+<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">TZEZAR's Table</h1>
 <h2
 	class="mb-2 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0"
 >
@@ -169,72 +168,64 @@
 	Sorting is not working in the example because dummyjson.com does not support it
 </p>
 
-
-
-
 <h4 class="scroll-m-20 pt-6 text-xl font-semibold tracking-tight">What is this?</h4>
 <p class="pb-6 leading-7">
-	I put into your hands just the merest component built on top of the great shadcn-svelte library
-	and built-in svelte functions like stores etc. You can change every part of the table - its
-	appearance, logic etc. This can be a great basis to build something that fits your needs
-	perfectly. Doesn't a component or basic solution suit you? Change it as you like!
+	I entrust to you a modest component, crafted atop the robust shadcn-svelte library, utilizing
+	built-in svelte functions such as stores, among others. Every aspect of the table - its
+	aesthetics, functionality, and beyond - can be customized to your heart's content. This serves as
+	an excellent foundation to tailor a solution precisely to your requirements. If a component or
+	basic solution doesn't quite align with your vision, fear not - mold it to your liking!
 </p>
 
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">For whom?</h4>
 <p class="pb-6 leading-7">
-	The component handles data from the server (client side soon). It's easy to extend with additional features, styling
-	shouldn't be difficult either. Use it if you already use shadcn-svelte and tailwind.
+	The component efficiently manages server-side data (with client-side capability coming soon). It's
+	designed for seamless extension with extra features, and styling integration should pose no major
+	challenges. If you're already leveraging shadcn-svelte and tailwind, incorporating this component
+	into your workflow is a natural fit.
 </p>
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Genesis</h4>
 <p class="pb-6 leading-7">
-	The genesis of the project was a personal project to operate a warehouse where a multitude of
-	different tables needed to be displayed. I tested various solutions such as the ag grid or reached
-	for headless solutions, but no solution suited me. The ready-made 'full' solutions, so to speak,
-	were hard to adapt to my needs, and headless like tanstack-table - they seem to be mega-flexible,
-	but I struggled to add my own solutions (perhaps because the documentation was quite difficult to
-	understand). Headless worked very well with client side data, but working with remote data was no
-	longer so straightforward. This is how the 530RGE table (pronounced 'george') came about.
-</p>
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Important note</h4>
-<p class="pb-6 leading-7">
-	I won't hide - I'm not some veteran programmer. Although the origins of my work with code date
-	back to 2017, my knowledge is scattered and unfocused only on the frontend. I write solutions for
-	my companies, so you could call me a jack of all trades and master of none. Programming is my
-	passion. I decided to make this 'package' public to contribute a little bit to open - source
-	projects, because I used them a lot. I have put a lot of time and heart into building this
-	component, but I am aware that it may not meet the code quality requirements of some people. I
-	recommend checking out github and the source code first - it will literally take a while to
-	understand it and you will see if this component is suitable for your needs.
+	This project started as a way for me to make warehouse operations smoother with dynamic table
+	displays. Despite trying options like ag-grid and headless solutions, none quite fit the bill.
+	'Full' solutions were tough to customize, and headless ones like tanstack-table had tricky
+	documentation. Dealing with remote data was also a hassle. So, TZEZAR's TABLE (pronounced like
+	'Caesar') was born to bridge the gap, offering flexibility. Feel free to tweak this component to
+	suit your needs!
 </p>
 
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Supported functions</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Currently Supported Functions</h4>
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">
-	<li>Column hiding</li>
-	<li>Column reordering</li>
-	<li>Column resizing</li>
-	<li>Conditonal styling</li>
-	<li>Content align</li>
-	<li>Custom content</li>
+	<li>Column Hiding</li>
+	<li>Column Reordering</li>
+	<li>Column Resizing</li>
+	<li>Conditional Styling</li>
+	<li>Content Alignment</li>
+	<li>Custom Content</li>
 	<li>Pagination</li>
-	<li>Inline row editing</li>
-	<li>Modal row editing</li>
-	<li>Row editing</li>
-	<li>Row expanding</li>
-	<li>Single column sorting</li>
+	<li>Inline Row Editing</li>
+	<li>Modal Row Editing</li>
+	<li>Row Editing</li>
+	<li>Row Expanding</li>
+	<li>Single Column Sorting</li>
 </ul>
-
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Planned functions</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Planned Functions</h4>
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">
-	<li>Client side functionality</li>
+	<li>Client-Side Functionality</li>
 	<li>Virtualization</li>
-	<li>Fullscreen</li>
-	<li>Cell density</li>
+	<li>Fullscreen Mode</li>
+	<li>Cell Density Adjustment</li>
 </ul>
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">What wont be added soon</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Not Planned for Immediate Addition</h4>
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">
-	<li>Aggregation and grouping</li>
-	<li>Column pinning</li>
+	<li>Aggregation and Grouping</li>
+	<li>Column Pinning</li>
 </ul>
+<p class="pb-6 leading-7">
+	If you spot any missing features, don't worry! Adding them should be a breeze. Feel free to
+	suggest ideas or improvements, and let's work together to make our component even better. Your
+	input is always welcome, and together, we can create something truly outstanding!
+</p>
 
 <p class="self-center pb-6 italic">
 	If you find the project interesting feel free to give a star on <a

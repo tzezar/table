@@ -3,7 +3,7 @@
 	import { Moon, Sun, Menu } from 'lucide-svelte';
 	import Sidebar from './_components/Sidebar.svelte';
 
-	import { ModeWatcher, toggleMode } from 'mode-watcher';
+	import { ModeWatcher, toggleMode, mode } from 'mode-watcher';
 
 	import { browser } from '$app/environment';
 	import { writable } from 'svelte/store';
@@ -26,16 +26,27 @@
 			}
 		}
 	});
+
+	import logoBlack from '$lib/assets/tzezar-logo-black.png';
+	import logoWhite from '$lib/assets/tzezar-logo-white.png';
 </script>
 
 <QueryClientProvider client={queryClient}>
 	<Toaster />
 	<ModeWatcher />
 	<div class="fixed h-full w-full">
-		<div class="header flex flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2">
-			<div class="flex w-full flex-row justify-between">
-				<a href="/">
-					<h1 class="text-4xl font-bold">530RGE TABLE</h1>
+		<div
+			class="header flex max-h-[64px] flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2"
+		>
+			<div class="flex w-full flex-row items-center justify-between">
+				<a href="/" class="flex flex-row items-center justify-center align-middle">
+					{#if $mode == 'dark'}
+						<img src={logoWhite} alt="" srcset="" class="h-[64px]" />
+					{:else}
+						<img src={logoBlack} alt="" srcset="" class="h-[64px]" />
+						<!-- else content here -->
+					{/if}
+					<h1 class="text-4xl font-bold">TZEZAR's TABLE</h1>
 				</a>
 
 				<div class="flex flex-row gap-2">
@@ -80,10 +91,10 @@
 					<Separator />
 					<div class="flex flex-row gap-2 self-center">
 						<a href="https://discord.gg/QySYfxSTvJ">DISCORD</a> |
-						<a href="https://github.com/530RGE/table">GITHUB</a>
+						<a href="https://github.com/tzezar/table">GITHUB</a>
 					</div>
 					<p class="self-center">
-						Sebastian "530RGE" Drozd {new Date().getFullYear()}
+						Sebastian "Tzezar" Drozd {new Date().getFullYear()}
 					</p>
 				</div>
 			</div>
