@@ -1,4 +1,4 @@
-# 530RGE TABLE
+# TZEZAR's TABLE
 
 Table component built in svelte based on shadcn-svelte components.
 
