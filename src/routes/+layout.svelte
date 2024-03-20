@@ -46,24 +46,17 @@
 						<img src={logoBlack} alt="" srcset="" class="h-[64px]" />
 						<!-- else content here -->
 					{/if}
-					<h1 class="text-4xl font-bold">TZEZAR's TABLE</h1>
+					<!-- <h1 class="text-2xl sm:text-4xl font-bold">TZEZAR's TABLE</h1> -->
+					<h1 class="flex flex-row text-nowrap text-4xl font-bold">
+						TZEZAR's <span class="hidden sm:flex">&nbspTABLE</span>
+					</h1>
 				</a>
 
 				<div class="flex flex-row gap-2">
-					<Button on:click={toggleMode} class="">
-						<div class="relative h-10 w-6">
-							<Sun
-								class=" absolute left-0 top-[20%] rotate-0 scale-100 transition-all  dark:scale-0"
-							/>
-							<Moon
-								class="absolute left-0 top-[20%] scale-0 transition-all dark:rotate-0 dark:scale-100"
-							/>
-						</div>
-					</Button>
 					<div class="flex items-center sm:hidden">
 						<Sheet.Root bind:open={$openStore}>
 							<Sheet.Trigger><Menu size={32} /></Sheet.Trigger>
-							<Sheet.Content side="right" class="p-2">
+							<Sheet.Content side="right" class="overflow-auto p-2">
 								<Sheet.Header>
 									<Sheet.Title>Menu</Sheet.Title>
 									<Sheet.Description></Sheet.Description>
@@ -74,6 +67,16 @@
 							</Sheet.Content>
 						</Sheet.Root>
 					</div>
+					<Button on:click={toggleMode} class="">
+						<div class="relative h-10 w-6">
+							<Sun
+								class=" absolute left-0 top-[20%] rotate-0 scale-100 transition-all  dark:scale-0"
+							/>
+							<Moon
+								class="absolute left-0 top-[20%] scale-0 transition-all dark:rotate-0 dark:scale-100"
+							/>
+						</div>
+					</Button>
 				</div>
 			</div>
 		</div>

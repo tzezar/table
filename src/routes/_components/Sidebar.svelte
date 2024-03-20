@@ -35,7 +35,7 @@
 	];
 </script>
 
-<div class="flex h-full w-full flex-col">
+<div class="flex h-full w-full flex-col ">
 	<ul class="flex h-full flex-col gap-2 bg-background/90 font-normal" {...$tree}>
 		{#each treeItems as item}
 			<a
