@@ -38,7 +38,7 @@
 	// and only 1 page become available. Page wont change automatically in this situation. Just add line as below to provide reactivity. Page is automatically calculated only when user change limit or page.
 	$: (page = 1), $search;
 
-	let enableFullscreenMode = true;
+	let enableFullscreenMode = false;
 	let enableVirtualization = false;
 	let enableSorting = true;
 	let enableResizing = true;
@@ -158,13 +158,7 @@
 			enableVirtualization = !enableVirtualization;
 		}}>{enableVirtualization ? 'Disable virtualization' : 'Enable virtualization'}</Button
 	>
-	<Button
-		class="grow"
-		variant="outline"
-		on:click={() => {
-			enableFullscreenMode = !enableFullscreenMode;
-		}}>{enableFullscreenMode ? 'Disable fullscreen mode' : 'Enable fullscreen mode'}</Button
-	>
+
 	<Button
 		class="grow"
 		variant="outline"
@@ -214,6 +208,14 @@
 		on:click={() => {
 			enableSorting = !enableSorting;
 		}}>{enableSorting ? 'Disable sorting' : 'Enable sorting'}</Button
+	>
+	<Button
+		disabled
+		class="grow"
+		variant="outline"
+		on:click={() => {
+			enableFullscreenMode = !enableFullscreenMode;
+		}}>{enableFullscreenMode ? 'Disable fullscreen mode' : 'Enable fullscreen mode'}</Button
 	>
 </div>
 
@@ -319,8 +321,13 @@
 		<p class="text-muted-foreground">Added 21/03/2024</p>
 	</li>
 	<li>
-		<p class="text-green-500">Fullscreen Mode</p>
-		<p class="text-muted-foreground">Added 21/03/2024</p>
+		<p class="text-green-500 opacity-45">Fullscreen Mode</p>
+		<p class="text-muted-foreground opacity-45">Added 21/03/2024</p>
+
+		<p class="text-muted-foreground">
+			<span class="text-red-500">HELP NEEDED</span> For unknown reason portal set to #tableContainer
+			cause expandedRows to render below table.
+		</p>
 	</li>
 </ul>
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Not Planned for Immediate Addition</h4>
