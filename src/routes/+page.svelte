@@ -38,6 +38,7 @@
 	// and only 1 page become available. Page wont change automatically in this situation. Just add line as below to provide reactivity. Page is automatically calculated only when user change limit or page.
 	$: (page = 1), $search;
 
+	let enableFullscreenMode = true;
 	let enableVirtualization = false;
 	let enableSorting = true;
 	let enableResizing = true;
@@ -161,6 +162,13 @@
 		class="grow"
 		variant="outline"
 		on:click={() => {
+			enableFullscreenMode = !enableFullscreenMode;
+		}}>{enableFullscreenMode ? 'Disable fullscreen mode' : 'Enable fullscreen mode'}</Button
+	>
+	<Button
+		class="grow"
+		variant="outline"
+		on:click={() => {
 			hideExpandedColumn();
 			$enableExpandableRow = !$enableExpandableRow;
 		}}>{$enableExpandableRow ? 'Disable expandable rows' : 'Enable expandable rows'}</Button
@@ -220,6 +228,7 @@
 	{enableResizing}
 	{enableSorting}
 	{enableVirtualization}
+	{enableFullscreenMode}
 	bind:selectedRows
 	bind:perPage
 	bind:page
@@ -309,8 +318,10 @@
 		<p class="text-green-500">Virtualization</p>
 		<p class="text-muted-foreground">Added 21/03/2024</p>
 	</li>
-	<li>Fullscreen Mode</li>
-	<li>Cell Density Adjustment</li>
+	<li>
+		<p class="text-green-500">Fullscreen Mode</p>
+		<p class="text-muted-foreground">Cell Density Adjustment</p>
+	</li>
 </ul>
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Not Planned for Immediate Addition</h4>
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">

@@ -36,7 +36,7 @@
 	<ModeWatcher />
 	<div class="fixed h-full w-full">
 		<div
-			class="header flex max-h-[64px] flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2"
+			class="header flex max-h-[64px] flex-row items-center gap-2 border-b-[1px] border-b-secondary p-2 z-50"
 		>
 			<div class="flex w-full flex-row items-center justify-between">
 				<a href="/" class="flex flex-row items-center justify-center align-middle">

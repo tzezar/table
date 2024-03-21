@@ -47,6 +47,12 @@
 	</p>
 	<h3 class="text-foreground">Density toggle</h3>
 	<p>This is actually implemented in my private project, I will soon add it for sure.</p>
-	<h3 class="text-foreground">Fullscreen</h3>
-	<p>As above</p>
+
+	<div class="">
+		<h3 class="text-foreground opacity-30 leading-none">Fullscreen</h3>
+		<p class="leading-none text-green-500">Added 21/03/2024</p>
+		<p class="opacity-30">
+			As above
+		</p>
+	</div>
 </article>
