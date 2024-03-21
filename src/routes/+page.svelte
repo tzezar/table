@@ -150,6 +150,57 @@
 	Table component built in svelte based on shadcn-svelte components.
 </h2>
 
+<Table
+	data={$query?.data?.products || []}
+	{columns}
+	{enableColumnReordering}
+	{enableColumnVisiblitySelect}
+	{enablePagination}
+	{enableResizing}
+	{enableSorting}
+	{enableVirtualization}
+	{enableFullscreenMode}
+	bind:selectedRows
+	bind:perPage
+	bind:page
+	count={$query.data?.total || 1}
+>
+	<div slot="actions">
+		{#if enableActions}
+			<div class="flex flex-row gap-2">
+				<Input bind:value={$search} />
+				<div>
+					<Sheet.Root>
+						<Sheet.Trigger>
+							<Button>Create record</Button>
+						</Sheet.Trigger>
+						<Sheet.Content>
+							<Sheet.Header>
+								<Sheet.Title>Create product form</Sheet.Title>
+								<Sheet.Description class="flex flex-col gap-2">
+									<Input disabled />
+									<Button disabled>Submit</Button>
+								</Sheet.Description>
+							</Sheet.Header>
+						</Sheet.Content>
+					</Sheet.Root>
+				</div>
+				<Button variant="destructive" disabled={$selectedRows.length < 1}>Delete</Button>
+			</div>
+		{/if}
+	</div>
+
+	<div slot="filters"></div>
+	<div slot="expandedRowContent" let:props>
+		{#if $enableExpandableRow}
+			<ExpandableRow {props} />
+		{/if}
+	</div>
+</Table>
+<p class="text-right text-foreground/50">
+	Sorting is not working in the example because dummyjson.com does not support it
+</p>
+
 <div class="flex flex-row flex-wrap gap-2 py-2">
 	<Button
 		class="grow"
@@ -218,59 +269,6 @@
 		}}>{enableFullscreenMode ? 'Disable fullscreen mode' : 'Enable fullscreen mode'}</Button
 	>
 </div>
-
-<Separator class="my-2" />
-
-<Table
-	data={$query?.data?.products || []}
-	{columns}
-	{enableColumnReordering}
-	{enableColumnVisiblitySelect}
-	{enablePagination}
-	{enableResizing}
-	{enableSorting}
-	{enableVirtualization}
-	{enableFullscreenMode}
-	bind:selectedRows
-	bind:perPage
-	bind:page
-	count={$query.data?.total || 1}
->
-	<div slot="actions">
-		{#if enableActions}
-			<div class="flex flex-row gap-2">
-				<Input bind:value={$search} />
-				<div>
-					<Sheet.Root>
-						<Sheet.Trigger>
-							<Button>Create record</Button>
-						</Sheet.Trigger>
-						<Sheet.Content>
-							<Sheet.Header>
-								<Sheet.Title>Create product form</Sheet.Title>
-								<Sheet.Description class="flex flex-col gap-2">
-									<Input disabled />
-									<Button disabled>Submit</Button>
-								</Sheet.Description>
-							</Sheet.Header>
-						</Sheet.Content>
-					</Sheet.Root>
-				</div>
-				<Button variant="destructive" disabled={$selectedRows.length < 1}>Delete</Button>
-			</div>
-		{/if}
-	</div>
-
-	<div slot="filters"></div>
-	<div slot="expandedRowContent" let:props>
-		{#if $enableExpandableRow}
-			<ExpandableRow {props} />
-		{/if}
-	</div>
-</Table>
-<p class="text-right text-foreground/50">
-	Sorting is not working in the example because dummyjson.com does not support it
-</p>
 
 <h4 class="scroll-m-20 pt-6 text-xl font-semibold tracking-tight">What is this?</h4>
 <p class="pb-6 leading-7">
