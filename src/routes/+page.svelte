@@ -149,14 +149,16 @@
 	Table component built in svelte based on shadcn-svelte components.
 </h2>
 
-<div class="flex flex-row gap-2 py-2 flex-wrap">
+<div class="flex flex-row flex-wrap gap-2 py-2">
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableVirtualization = !enableVirtualization;
 		}}>{enableVirtualization ? 'Disable virtualization' : 'Enable virtualization'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			hideExpandedColumn();
@@ -164,36 +166,42 @@
 		}}>{$enableExpandableRow ? 'Disable expandable rows' : 'Enable expandable rows'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableActions = !enableActions;
 		}}>{enableActions ? 'Disable actions' : 'Enable actions'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableColumnVisiblitySelect = !enableColumnVisiblitySelect;
 		}}>{enableColumnVisiblitySelect ? 'Disable column hiding' : 'Enable column hiding'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableColumnReordering = !enableColumnReordering;
 		}}>{enableColumnReordering ? 'Disable column reordering' : 'Enable column reordering'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enablePagination = !enablePagination;
 		}}>{enablePagination ? 'Disable pagination' : 'Enable pagination'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableResizing = !enableResizing;
 		}}>{enableResizing ? 'Disable resizing' : 'Enable resizing'}</Button
 	>
 	<Button
+		class="grow"
 		variant="outline"
 		on:click={() => {
 			enableSorting = !enableSorting;
@@ -298,8 +306,8 @@
 <ul class="ml-6 list-disc pb-6 [&>li]:mt-2">
 	<li>Client-Side Functionality</li>
 	<li>
-		<p  class="text-green-500">Virtualization</p>
-		<p class='text-muted-foreground'>Added 21/03/2024</p>
+		<p class="text-green-500">Virtualization</p>
+		<p class="text-muted-foreground">Added 21/03/2024</p>
 	</li>
 	<li>Fullscreen Mode</li>
 	<li>Cell Density Adjustment</li>
