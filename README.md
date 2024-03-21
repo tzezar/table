@@ -12,6 +12,7 @@ Based on the excellent [shadcn-svelte](https://github.com/huntabyte/shadcn-svelt
 You copy the component directly into your project and can edit it as you wish. It is something between a ready-made data-grid and a headless table.
 
 ## Supported Functions
+- Virtualization
 - Column hiding
 - Column reordering
 - Column resizing
