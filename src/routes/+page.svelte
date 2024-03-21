@@ -149,7 +149,7 @@
 	Table component built in svelte based on shadcn-svelte components.
 </h2>
 
-<div class="flex flex-row gap-2 py-2">
+<div class="flex flex-row gap-2 py-2 flex-wrap">
 	<Button
 		variant="outline"
 		on:click={() => {
