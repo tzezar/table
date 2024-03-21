@@ -22,9 +22,12 @@
 	import { createColumnSizesStore } from './stores/columnSizesStore.js';
 	import ColumnOrderDraggableChanger from './components/ColumnOrderDraggableChanger.svelte';
 	import { writable } from 'svelte/store';
+	import { createVirtualizer } from '@tanstack/svelte-virtual';
 
 	export let loading = true;
 	export let data: any[] = [];
+	$: console.log('data', data);
+
 	export let columns: Columns;
 
 	// temporary made a store for column reordering
@@ -82,6 +85,7 @@
 	export let enableSorting: boolean = false;
 	export let enableResizing: boolean = false;
 	export let enableColumnReordering: boolean = false;
+	export let enableVirtualization: boolean = false;
 
 	function resize(node: HTMLElement, options: any) {
 		let { accessor } = options;
@@ -133,6 +137,33 @@
 			}
 		};
 	}
+
+
+
+	// not 100% sure if vritualized rows without store will be all the time reactive
+	// uncomment below and report bug if any error happens
+	
+	// let data = writable(data);
+	// $: data.set(data);
+
+	// VIRTUALIZATION
+	let virtualListEl: HTMLDivElement;
+	let virtualItemEls: HTMLDivElement[] = [];
+	$: virtualizer = createVirtualizer<HTMLDivElement, HTMLDivElement>({
+		count: data.length,
+		getScrollElement: () => virtualListEl,
+		estimateSize: () => 44,
+		overscan: 2
+	});
+	$: items = $virtualizer.getVirtualItems();
+	$: {
+		if (virtualItemEls.length) {
+			virtualItemEls.forEach((el) => $virtualizer.measureElement(el));
+		}
+		$expandedRows;
+	}
+
+	$: console.log(items);
 </script>
 
 <div class="flex flex-col">
@@ -210,65 +241,129 @@
 					</div>
 				</div>
 				<!-- TBODY -->
-				<div class="flex flex-col">
-					{#if !loading && data.length < 1}
-						<!-- TR -->
-						<div>
-							<!-- TD -->
-							<div class="flex">
-								<div class="flex flex-col items-center justify-center">
-									<FolderX class="size-10 text-muted-foreground" strokeWidth={1} />
-									<p class="text-md text-muted-foreground">No data found</p>
-								</div>
+
+				{#if enableVirtualization}
+					<div class="shadow-xs h-[400px] overflow-auto" bind:this={virtualListEl}>
+						<div style="position: relative; height: {$virtualizer.getTotalSize()}px; width: 100%;">
+							<div
+								style="position: absolute; top: 0; left: 0; width: 100%; transform: translateY({items[0]
+									? items[0].start
+									: 0}px);"
+							>
+								{#each items as row, idx (row.index)}
+									{@const dataRow = data[row.index]}
+									{@const dataIndex = row.index}
+									<!-- row -->
+									<div
+										bind:this={virtualItemEls[idx]}
+										data-index={row.index}
+										class="flex-col items-center justify-center border-b-[1px] last:border-b-0"
+									>
+										<div
+											class={cn(
+												'group flex h-10 flex-row items-center gap-x-2 border-b-[1px] border-border last:border-b-0 hover:bg-accent/50',
+												typeof classNames.row === 'function' ? classNames.row(row) : classNames.row
+											)}
+										>
+											{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column}
+												<!-- TD -->
+												<div
+													class={cn(
+														' truncate text-nowrap first:pl-2 last:grow last:pr-2',
+														typeof classNames.cell === 'function'
+															? classNames.cell(row, column)
+															: classNames.cell
+													)}
+													style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor)
+														.w}px"
+													class:text-start={column?.config?.align == 'left'}
+													class:text-center={column?.config?.align == 'center'}
+													class:text-end={column?.config?.align == 'right'}
+												>
+													{#if $inlineEditing.includes(dataRow.id)}
+														<CellEditableTemplate row={dataRow} rowIndex={dataIndex} {column} />
+													{:else}
+														<CellTemplate row={dataRow} rowIndex={dataIndex} {column} />
+													{/if}
+												</div>
+											{/each}
+										</div>
+										{#if $expandedRows.includes(dataRow.id)}
+											<div class=" bg-expandedTableContent h-full w-full">
+												<slot
+													name="expandedRowContent"
+													props={{
+														row: dataRow,
+														rowIndex: dataIndex
+													}}
+												/>
+											</div>
+										{/if}
+									</div>
+								{/each}
 							</div>
 						</div>
-					{/if}
-
-					{#each data as row, rowIndex}
-						<!-- TR -->
-						<div
-							class={cn(
-								'group flex h-10 flex-row items-center gap-x-2 border-b-[1px] border-border last:border-b-0 hover:bg-accent/50',
-								typeof classNames.row === 'function' ? classNames.row(row) : classNames.row
-							)}
-						>
-							{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column}
+					</div>
+				{:else if !enableVirtualization}
+					<div class="flex flex-col">
+						{#if !loading && data.length < 1}
+							<!-- TR -->
+							<div>
 								<!-- TD -->
-								<div
-									class={cn(
-										' truncate text-nowrap first:pl-2 last:grow last:pr-2',
-										typeof classNames.cell === 'function'
-											? classNames.cell(row, column)
-											: classNames.cell
-									)}
-									style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
-									class:text-start={column?.config?.align == 'left'}
-									class:text-center={column?.config?.align == 'center'}
-									class:text-end={column?.config?.align == 'right'}
-								>
-									{#if $inlineEditing.includes(row.id)}
-										<CellEditableTemplate {row} {rowIndex} {column} />
-									{:else}
-										<CellTemplate {row} {rowIndex} {column} />
-									{/if}
+								<div class="flex">
+									<div class="flex flex-col items-center justify-center">
+										<FolderX class="size-10 text-muted-foreground" strokeWidth={1} />
+										<p class="text-md text-muted-foreground">No data found</p>
+									</div>
 								</div>
-							{/each}
-
-							<!-- class:bg-red-400={row.id == 4} -->
-						</div>
-						{#if $expandedRows.includes(row.id)}
-							<div class=" bg-expandedTableContent h-full w-full">
-								<slot
-									name="expandedRowContent"
-									props={{
-										row,
-										rowIndex
-									}}
-								/>
 							</div>
 						{/if}
-					{/each}
-				</div>
+						{#each data as row, rowIndex}
+							<!-- TR -->
+							<div
+								class={cn(
+									'group flex h-10 flex-row items-center gap-x-2 border-b-[1px] border-border last:border-b-0 hover:bg-accent/50',
+									typeof classNames.row === 'function' ? classNames.row(row) : classNames.row
+								)}
+							>
+								{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column}
+									<!-- TD -->
+									<div
+										class={cn(
+											' truncate text-nowrap first:pl-2 last:grow last:pr-2',
+											typeof classNames.cell === 'function'
+												? classNames.cell(row, column)
+												: classNames.cell
+										)}
+										style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
+										class:text-start={column?.config?.align == 'left'}
+										class:text-center={column?.config?.align == 'center'}
+										class:text-end={column?.config?.align == 'right'}
+									>
+										{#if $inlineEditing.includes(row.id)}
+											<CellEditableTemplate {row} {rowIndex} {column} />
+										{:else}
+											<CellTemplate {row} {rowIndex} {column} />
+										{/if}
+									</div>
+								{/each}
+
+								<!-- class:bg-red-400={row.id == 4} -->
+							</div>
+							{#if $expandedRows.includes(row.id)}
+								<div class=" bg-expandedTableContent h-full w-full">
+									<slot
+										name="expandedRowContent"
+										props={{
+											row,
+											rowIndex
+										}}
+									/>
+								</div>
+							{/if}
+						{/each}
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>

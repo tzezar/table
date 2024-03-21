@@ -59,6 +59,7 @@
 	"dependencies": {
 		"@tanstack/svelte-query": "^5.28.4",
 		"@tanstack/svelte-query-devtools": "^5.28.4",
+		"@tanstack/svelte-virtual": "^3.2.0",
 		"bits-ui": "^0.19.7",
 		"clsx": "^2.1.0",
 		"lucide-svelte": "^0.358.0",
