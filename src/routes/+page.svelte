@@ -320,7 +320,7 @@
 	</li>
 	<li>
 		<p class="text-green-500">Fullscreen Mode</p>
-		<p class="text-muted-foreground">Cell Density Adjustment</p>
+		<p class="text-muted-foreground">Added 21/03/2024</p>
 	</li>
 </ul>
 <h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Not Planned for Immediate Addition</h4>
