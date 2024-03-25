@@ -29,7 +29,6 @@
 
 	export let loading = true;
 	export let data: any[] = [];
-	$: console.log('data', data);
 
 	export let columns: Columns;
 
