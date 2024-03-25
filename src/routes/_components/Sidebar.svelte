@@ -31,6 +31,7 @@
 		{ title: 'Row modal editing', link: '/row-modal-editing' },
 		{ title: 'Content align', link: '/content-align' },
 		{ title: 'Conditional styling', link: '/conditional-styling' },
+		{ title: 'Client mode', link: '/client-mode' },
 		{ title: 'Planned', link: '/planned' },
 	];
 </script>

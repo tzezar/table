@@ -26,10 +26,11 @@
 	import ColumnOrderDraggableChanger from './components/ColumnOrderDraggableChanger.svelte';
 	import { writable } from 'svelte/store';
 	import { createVirtualizer } from '@tanstack/svelte-virtual';
+	import { sortByPropertyName } from './utils/clientMode.js';
 
+	export let mode: 'server' | 'client' = 'server';
 	export let loading = true;
 	export let data: any[] = [];
-
 	export let columns: Columns;
 
 	// temporary made a store for column reordering
@@ -63,7 +64,23 @@
 	export let expandedRows = createExpandedRowsStore([]);
 	export let minW: number = 35;
 	export let maxW: number = 1000;
-	$: visibleRows.set(data);
+
+	$: if (mode == 'server') {
+		visibleRows.set(data);
+	}
+
+
+
+	$: if (mode == 'client') {
+		visibleRows.set(
+			sortByPropertyName(data, $sorting.accessor, $sorting).slice(
+				page * perPage - perPage,
+				page * perPage
+			)
+		);
+		count = data.length || 0;
+		data;
+	}
 
 	export let columnSizes = createColumnSizesStore([]);
 	$: $columnSizes = columns.map((c) => {
@@ -166,10 +183,9 @@
 		$expandedRows;
 	}
 
+	// FULLSCREEN
 	let target = writable('#tableContent');
 </script>
-
-
 
 <!-- portal set to tableContent cause expanded rows to render below table - idk why  -->
 <!-- there is no way to use action conditionally so disabling portal conditionally is not possible -->
@@ -201,7 +217,6 @@
 				{#if enableFullscreenMode}
 					<FullscreenModeToggle {fullscreenMode} {target} />
 				{/if}
-				<!-- <Button size="icon" variant="default"><Settings /></Button> -->
 			</div>
 		</div>
 		<div>
@@ -340,7 +355,7 @@
 								</div>
 							</div>
 						{/if}
-						{#each data as row, rowIndex}
+						{#each $visibleRows as row, rowIndex}
 							<!-- TR -->
 							<div
 								class={cn(
