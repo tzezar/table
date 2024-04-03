@@ -40,9 +40,9 @@
 					<!-- class:hidden={item.config.hideable == false} -->
 					<div
 						animate:flip={{ duration: flipDurationMs }}
-						class={cn("item text-md flex flex-row items-center justify-between rounded-sm border-solid border-border px-2 font-medium", item.config.moveable != false && 'py-1 border-[1px] mb-2')}
+						class={cn("item text-md flex flex-row items-center justify-between rounded-sm border-solid border-border px-2 font-medium", item?.config?.moveable != false && 'py-1 border-[1px] mb-2')}
 					>
-						{#if item.config.moveable != false}
+						{#if item?.config?.moveable != false}
 							{item.header}
 							<GripHorizontal size={18} />
 							{#if item[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
