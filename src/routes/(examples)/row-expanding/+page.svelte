@@ -24,7 +24,9 @@
 		{
 			accessor: 'expanded',
 			header: '',
-			cell: RowExpandToggle,
+			cell: {
+				component: RowExpandToggle
+			},
 			config: {
 				sortable: false,
 				resizable: true,

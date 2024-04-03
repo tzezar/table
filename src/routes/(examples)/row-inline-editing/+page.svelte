@@ -21,7 +21,9 @@
 		{
 			accessor: 'title',
 			header: 'Title',
-			cellEdit: TextInputEditableCell,
+			cell: {
+				componentEditable: TextInputEditableCell
+			},
 			config: {
 				size: {
 					w: 200
@@ -31,7 +33,9 @@
 		{
 			accessor: 'description',
 			header: 'Description',
-			cellEdit: TextInputEditableCell,
+			cell: {
+				componentEditable: TextInputEditableCell
+			},
 			config: {
 				size: {
 					w: 200
@@ -43,8 +47,10 @@
 		{
 			accessor: 'actions',
 			header: '',
-			cell: InlineRowEditingToggleCell,
-			cellEdit: InlineRowEditingToggleCell,
+			cell: {
+				componentEditable: InlineRowEditingToggleCell,
+				component: InlineRowEditingToggleCell
+			},
 			extra: {
 				onChange: ({ value, id }: { value: string; id: number }) =>
 					console.log({ value, id, accessor: 'something' })

@@ -16,7 +16,7 @@
 		}
 	};
 </script>
-<div class='align-middle justify-center flex items-center h-full w-full'>
 
-	<Checkbox bind:checked on:click={(e) => selectRow({ rowId })} class=''/>
+<div class="pt-1">
+	<Checkbox bind:checked on:click={(e) => selectRow({ rowId })} class="" />
 </div>

@@ -88,7 +88,9 @@
 					w: 300
 				}
 			},
-			cellEdit: SelectBrand,
+			cell: {
+				component: SelectBrand
+			}
 			// remember to pass rows
 			extra: {
 				rows
@@ -101,7 +103,9 @@
 		{
 			accessor: 'price',
 			header: 'Price',
-			cellEdit: ValueCellEdit,
+			cell: {
+				componentEditable: ValueCellEdit
+			},
 			extra: {
 				rows,
 				onChange: async ({ value, id, accessor }: OnChangeProps) => {
@@ -118,8 +122,10 @@
 		{
 			accessor: 'actions',
 			header: '',
-			cell: InlineEditing,
-			cellEdit: InlineEditing,
+			cell: {
+				component:InlineEditing,
+				componentEditable: InlineEditing
+			},
 			// I created separate component to handle this case, but with little tweak you might be able
 			// to create 100% reusable component for both cases (cell edit, save on click).
 

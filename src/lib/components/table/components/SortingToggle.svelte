@@ -9,18 +9,18 @@
 </script>
 
 {#if $sorting.accessor == column.accessor}
-	{#if $sorting.direction == 'ASC'}
+	{#if $sorting.direction == 'asc'}
 		<Button
 			variant="outline"
 			size="icon"
 			class="size-5"
 			on:click={() => {
-				sorting.set({ accessor: column.accessor, direction: 'DESC' });
+				sorting.set({ accessor: column.accessor, direction: 'desc' });
 			}}
 		>
 			<ArrowDownAz />
 		</Button>
-	{:else if $sorting.direction == 'DESC'}
+	{:else if $sorting.direction == 'desc'}
 		<Button
 			variant="outline"
 			size="icon"
@@ -38,7 +38,7 @@
 		size="icon"
 		class="hidden size-5 group-hover:flex"
 		on:click={() => {
-			sorting.set({ accessor: column.accessor, direction: 'ASC' });
+			sorting.set({ accessor: column.accessor, direction: 'asc' });
 		}}
 	>
 		<ArrowUpDown />

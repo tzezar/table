@@ -23,7 +23,7 @@
 	export let page: number;
 </script>
 
-<div class="flex flex-wrap justify-start gap-2">
+<div class="flex flex-wrap gap-2 w-full">
 	<div>
 		<Pagination.Root {count} {perPage} {siblingCount} let:pages let:currentPage bind:page>
 			<Pagination.Content>
@@ -70,15 +70,14 @@
 			}}
 			selected={limits.find((p) => p.value == perPage)}
 		>
-			<Select.Trigger class="w-[180px]">
+			<Select.Trigger class="grow">
 				<Select.Value />
 			</Select.Trigger>
-			<Select.Content align="start">
+			<Select.Content align="start" sameWidth={false}>
 				{#each limits as limit}
 					<Select.Item value={limit.value} label={limit.label}>{limit.label}</Select.Item>
 				{/each}
 			</Select.Content>
-			<Select.Input name="favoriteFruit" />
 		</Select.Root>
 	</div>
 </div>

@@ -35,9 +35,13 @@
 					w: 30
 				}
 			},
-			cell: RowSelectCheckbox,
-			cellEdit: RowSelectCheckbox,
-			headerCell: HeaderSelectCheckbox
+			cell: {
+				component: RowSelectCheckbox,
+				componentEditable: RowSelectCheckbox
+			},
+			head: {
+				component: HeaderSelectCheckbox
+			}
 		},
 		{ accessor: 'id', header: 'Id' },
 		{

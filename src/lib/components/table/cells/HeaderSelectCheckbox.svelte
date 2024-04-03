@@ -14,27 +14,34 @@
 		getContext('table');
 </script>
 
-<div>
-	<DropdownMenu.Root>
-		<DropdownMenu.Trigger>
-			<Button variant="outline" size="icon" class="size-5 align-middle">
-				<MoreHorizontal />
-			</Button>
-		</DropdownMenu.Trigger>
-		<DropdownMenu.Content>
-			<DropdownMenu.Group>
-				<DropdownMenu.Label>Rows</DropdownMenu.Label>
-				<DropdownMenu.Separator />
-				<DropdownMenu.Item on:click={() => selectedRows.selectAllOnPage($visibleRows)}
-					>Select all on page</DropdownMenu.Item
-				>
-				<DropdownMenu.Item on:click={() => selectedRows.deselectAllOnPage($visibleRows)}
-					>Unselect all on page</DropdownMenu.Item
-				>
-				<DropdownMenu.Item on:click={() => selectedRows.deselectAll()}
-					>Unselect all</DropdownMenu.Item
-				>
-			</DropdownMenu.Group>
-		</DropdownMenu.Content>
-	</DropdownMenu.Root>
-</div>
+
+
+<DropdownMenu.Root>
+	<DropdownMenu.Trigger
+		asChild
+		let:builder
+		class="flex w-full items-center justify-center align-middle self-center "
+	>
+		<Button variant="outline" class="m-0 h-fit p-0" builders={[builder]}>
+			<MoreHorizontal size={20}/>
+		</Button>
+
+		<!-- <Button builders={[builder]} size='xs' variant='' class='leading-none justify-center align-middle flex'> -->
+		<!-- </Button> -->
+	</DropdownMenu.Trigger>
+	<DropdownMenu.Content align="start">
+		<DropdownMenu.Group>
+			<DropdownMenu.Label>Rows</DropdownMenu.Label>
+			<DropdownMenu.Separator />
+			<DropdownMenu.Item on:click={() => selectedRows.selectAllOnPage($visibleRows)}
+				>Select all on page</DropdownMenu.Item
+			>
+			<DropdownMenu.Item on:click={() => selectedRows.deselectAllOnPage($visibleRows)}
+				>Deselect all on page</DropdownMenu.Item
+			>
+			<DropdownMenu.Item on:click={() => selectedRows.deselectAll()}
+				>Deselec all</DropdownMenu.Item
+			>
+		</DropdownMenu.Group>
+	</DropdownMenu.Content>
+</DropdownMenu.Root>

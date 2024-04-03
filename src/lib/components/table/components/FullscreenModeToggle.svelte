@@ -9,6 +9,7 @@
 </script>
 
 <Button
+	class="grow"
 	variant="outline"
 	on:click={() => {
 		fullscreenMode.toggle();

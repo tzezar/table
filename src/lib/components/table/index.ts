@@ -1,15 +1,25 @@
+type ClassFunction = (props: { row: any; column: Column }) => string;
+
 
 export type Column = {
     accessor: string;
-    header: string;
-    cell?: any;
-    cellEdit?: any;
-    headerCell?: any,
+    header?: string,
+    head?: {
+        component?: any,
+        class?: string
+    },
+    cell?: {
+        component?: any,
+        componentEditable?: any,
+        simplified?: (props: { row: any; column: Column, value: string | number | any, rowIndex: number }) => string,
+        class?: string | ClassFunction
+    },
     config?: {
         visible?: boolean,
         sortable?: boolean,
         disableHiding?: boolean,
         resizable?: boolean,
+        moveable?: boolean,
         size?: {
             w?: number,
             minW?: number,

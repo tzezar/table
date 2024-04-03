@@ -7,7 +7,7 @@
 	name={props.column.accessor}
 	type="text"
 	value={props.value}
-	class="rounded-none border-y-0 bg-none pr-0 h-full "
+	class="rounded-none  bg-none px-0 h-full py-0 "
 	on:change={(e) =>
 		props.column.extra.onChange({
 			value: e.target.value,

@@ -1,19 +1,16 @@
 <script lang="ts">
 	import Table from '$lib/components/table/Table.svelte';
 	import HeaderSelectCheckbox from '$lib/components/table/cells/HeaderSelectCheckbox.svelte';
-	import RowExpandToggle from '$lib/components/table/cells/RowExpandToggle.svelte';
 	import RowSelectCheckbox from '$lib/components/table/cells/RowSelectCheckbox.svelte';
 	import type { Columns } from '$lib/components/table/index.js';
 	import { createSelectedRowsStore } from '$lib/components/table/stores/selectedRowsStore.js';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
-	import ExpandableRow from './_components/ExpandableRow.svelte';
 	import RatingCell from './_components/RatingCell.svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import * as Sheet from '$lib/components/ui/sheet';
 	import TitleHeaderCell from './_components/TitleHeaderCell.svelte';
 	import { writable } from 'svelte/store';
-	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import CustomRowExpandToggle from './_components/custom-row-expand/CustomRowExpandToggle.svelte';
 
 	let search = writable('');
@@ -38,7 +35,7 @@
 	// and only 1 page become available. Page wont change automatically in this situation. Just add line as below to provide reactivity. Page is automatically calculated only when user change limit or page.
 	$: (page = 1), $search;
 
-	let enableFullscreenMode = false;
+	let enableFullscreenMode = true;
 	let enableVirtualization = false;
 	let enableSorting = true;
 	let enableResizing = true;
@@ -52,10 +49,13 @@
 		{
 			accessor: 'expanded',
 			header: '',
-			cell: CustomRowExpandToggle,
+			cell: {
+				component: CustomRowExpandToggle
+			},
 			config: {
 				sortable: false,
 				resizable: true,
+				moveable: false,
 				size: {
 					w: 45
 				}
@@ -69,15 +69,22 @@
 			header: '',
 			config: {
 				sortable: false,
-				align: 'center',
 				resizable: false,
+				moveable: false,
+
 				size: {
-					w: 30
+					w: 60
 				}
 			},
-			cell: RowSelectCheckbox,
-			cellEdit: RowSelectCheckbox,
-			headerCell: HeaderSelectCheckbox
+			cell: {
+				component: RowSelectCheckbox,
+				// componentEditable: RowSelectionCheckbox,
+				class: 'align-top justify-start items-start flex '
+			},
+			head: {
+				component: HeaderSelectCheckbox,
+				class: `items-center align-middle justify-center`
+			}
 		},
 		{
 			accessor: 'id',
@@ -94,7 +101,9 @@
 		{
 			accessor: 'title',
 			header: 'Name',
-			headerCell: TitleHeaderCell,
+			head: {
+				component: TitleHeaderCell
+			},
 			config: {
 				sortable: false,
 				size: {
@@ -121,10 +130,12 @@
 		{
 			accessor: 'rating',
 			header: 'Rating',
-			cell: RatingCell,
+			cell: {
+				component: RatingCell
+			},
 			config: {
 				size: {
-					w: 40,
+					w: 100,
 					minW: 40,
 					maxW: 200
 				}
@@ -150,53 +161,56 @@
 	Table component built in svelte based on shadcn-svelte components.
 </h2>
 
-<Table
-	data={$query?.data?.products || []}
-	{columns}
-	{enableColumnReordering}
-	{enableColumnVisiblitySelect}
-	{enablePagination}
-	{enableResizing}
-	{enableSorting}
-	{enableVirtualization}
-	{enableFullscreenMode}
-	bind:selectedRows
-	bind:perPage
-	bind:page
-	count={$query.data?.total || 1}
->
-	<div slot="actions">
-		{#if enableActions}
-			<div class="flex flex-row gap-2">
-				<Input bind:value={$search} />
-				<div>
-					<Sheet.Root>
-						<Sheet.Trigger>
-							<Button>Create record</Button>
-						</Sheet.Trigger>
-						<Sheet.Content>
-							<Sheet.Header>
-								<Sheet.Title>Create product form</Sheet.Title>
-								<Sheet.Description class="flex flex-col gap-2">
-									<Input disabled />
-									<Button disabled>Submit</Button>
-								</Sheet.Description>
-							</Sheet.Header>
-						</Sheet.Content>
-					</Sheet.Root>
+<div>
+	<Table
+		data={$query?.data?.products || []}
+		{columns}
+		{enableColumnReordering}
+		{enableColumnVisiblitySelect}
+		{enablePagination}
+		{enableResizing}
+		{enableSorting}
+		{enableVirtualization}
+		{enableFullscreenMode}
+		bind:selectedRows
+		bind:perPage
+		bind:page
+		count={$query.data?.total || 1}
+	>
+		<div slot="actions">
+			{#if enableActions}
+				<div class="flex flex-row gap-2">
+					<Input bind:value={$search} />
+					<div>
+						<Sheet.Root>
+							<Sheet.Trigger>
+								<Button>Create record</Button>
+							</Sheet.Trigger>
+							<Sheet.Content>
+								<Sheet.Header>
+									<Sheet.Title>Create product form</Sheet.Title>
+									<Sheet.Description class="flex flex-col gap-2">
+										<Input disabled />
+										<Button disabled>Submit</Button>
+									</Sheet.Description>
+								</Sheet.Header>
+							</Sheet.Content>
+						</Sheet.Root>
+					</div>
+					<Button variant="destructive" disabled={$selectedRows.length < 1}>Delete</Button>
 				</div>
-				<Button variant="destructive" disabled={$selectedRows.length < 1}>Delete</Button>
-			</div>
-		{/if}
-	</div>
+			{/if}
+		</div>
 
-	<div slot="filters"></div>
-	<div slot="expandedRowContent" let:props>
-		{#if $enableExpandableRow}
-			<ExpandableRow {props} />
-		{/if}
-	</div>
-</Table>
+		<div slot="filters"></div>
+		<div slot="expandedRowContent" let:props>
+			{#if $enableExpandableRow}
+				<div>custom expanded row</div>
+			{/if}
+		</div>
+	</Table>
+</div>
+
 <p class="text-right text-foreground/50">
 	Sorting is not working in the example because dummyjson.com does not support it
 </p>

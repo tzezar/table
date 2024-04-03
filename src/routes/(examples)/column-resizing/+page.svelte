@@ -57,5 +57,3 @@
 	minW={70}
 	defaultColumnWidth={100}
 />
-
-

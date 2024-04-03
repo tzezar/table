@@ -8,7 +8,7 @@
 	name={props.column.accessor}
 	type="number"
 	value={props.value}
-	class="bg-none pr-0 rounded-none border-y-0 pl-0 text-md"
+	class="h-full py-0 my-0 bg-none pr-0 rounded-none border-y-0 pl-0 text-md"
 	on:change={(e) =>
 		props.column.extra.onChange({
 			value: +e.target.value,

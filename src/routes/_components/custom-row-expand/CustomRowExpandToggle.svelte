@@ -11,20 +11,16 @@
 	$: rowId = props.row.id as number;
 
 	const { expandedRows }: { expandedRows: ExpandedRows } = getContext('table');
-
-	$: enableExpandableRow = props.column.extra.enableExpandableRow;
 </script>
 
-{#if $enableExpandableRow}
-	<div class="flex h-full w-full items-center justify-center align-middle">
-		{#if $expandedRows.includes(rowId)}
-			<Button variant="ghost" size="tableCell" on:click={() => expandedRows.collapse(rowId)}
-				><ArrowUpFromLine class="size-4" /></Button
-			>
-		{:else}
-			<Button variant="ghost" size="tableCell" on:click={() => expandedRows.expand(rowId)}
-				><ArrowDownFromLine class="size-4" /></Button
-			>
-		{/if}
-	</div>
-{/if}
+<div class="pt-1">
+	{#if $expandedRows.includes(rowId)}
+		<Button variant="ghost" size="tableCell" on:click={() => expandedRows.collapse(rowId)}>
+			<ArrowUpFromLine class="size-4" />
+		</Button>
+	{:else}
+		<Button variant="ghost" size="tableCell" on:click={() => expandedRows.expand(rowId)}>
+			<ArrowDownFromLine class="size-4" />
+		</Button>
+	{/if}
+</div>

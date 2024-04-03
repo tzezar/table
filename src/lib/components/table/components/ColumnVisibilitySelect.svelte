@@ -12,7 +12,7 @@
 
 <DropdownMenu.Root closeOnItemClick={false}>
 	<DropdownMenu.Trigger asChild let:builder>
-		<Button variant="outline" class="ml-auto" builders={[builder]}>
+		<Button variant="outline" class="grow" builders={[builder]}>
 			Visibility <ChevronDown class="ml-2 h-4 w-4" />
 		</Button>
 	</DropdownMenu.Trigger>

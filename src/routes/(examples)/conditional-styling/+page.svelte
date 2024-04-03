@@ -46,8 +46,8 @@
 	{columns}
 	data={$query?.data?.products}
 	classNames={{
-		row: (row) => (row.title.startsWith('S') ? 'bg-red-400 hover:bg-red-400/80' : ''),
-		cell: (row, column) => {
+		row: ({row}) => (row.title.startsWith('S') ? 'bg-red-400 hover:bg-red-400/80' : ''),
+		cell: ({row, column}) => {
 			return column.accessor == 'brand' ? 'bg-blue-400 hover:bg-blue-400/80' : '';
 		}
 	}}

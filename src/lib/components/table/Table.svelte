@@ -26,7 +26,8 @@
 	import ColumnOrderDraggableChanger from './components/ColumnOrderDraggableChanger.svelte';
 	import { writable } from 'svelte/store';
 	import { createVirtualizer } from '@tanstack/svelte-virtual';
-	import { sortByPropertyName } from './utils/clientMode.js';
+	import { sortByPropertyName } from './utils/clientMode';
+	import * as Table from '$lib/components/table/table';
 
 	export let mode: 'server' | 'client' = 'server';
 	export let loading = true;
@@ -69,8 +70,6 @@
 		visibleRows.set(data);
 	}
 
-
-
 	$: if (mode == 'client') {
 		visibleRows.set(
 			sortByPropertyName(data, $sorting.accessor, $sorting).slice(
@@ -80,6 +79,7 @@
 		);
 		count = data.length || 0;
 		data;
+		$sorting
 	}
 
 	export let columnSizes = createColumnSizesStore([]);
@@ -185,229 +185,210 @@
 
 	// FULLSCREEN
 	let target = writable('#tableContent');
+
 </script>
 
-<!-- portal set to tableContent cause expanded rows to render below table - idk why  -->
-<!-- there is no way to use action conditionally so disabling portal conditionally is not possible -->
-<!-- expanded rows functionality is more important to me than fullscreen mode -->
-<!-- you can choose one or another -->
 
-<!-- <div id="tableContent">
+
+<div id="tableContent">
 	<div
 		class={cn(
 			'z-10 flex flex-col bg-background',
 			$fullscreenMode ? 'absolute h-screen w-screen p-2' : 'flex h-full w-full flex-col'
 		)}
 		use:portalAction={$target}
-	> -->
-
-<div>
-	<div class={cn(enableColumnReordering || enableColumnVisiblitySelect ? 'pb-2' : '')}>
-		<div class="flex flex-col justify-between gap-2 sm:flex-row">
-			<div>
-				<slot name="actions" />
-			</div>
-			<div class="flex flex-row items-center gap-2 self-end">
-				{#if enableColumnReordering}
-					<ColumnOrderDraggableChanger columns={columnsStore} />
-				{/if}
-				{#if enableColumnVisiblitySelect}
-					<ColumnVisibilitySelect {columns} hidden={hiddenColumns} />
-				{/if}
-				{#if enableFullscreenMode}
-					<FullscreenModeToggle {fullscreenMode} {target} />
-				{/if}
-			</div>
-		</div>
+	>
 		<div>
-			<slot name="filters" />
-		</div>
-	</div>
-	<div class={cn('h-full w-full', enablePagination && 'pb-2')}>
-		<div class="overflow-auto border-[1px] border-solid">
-			<!-- TABLE -->
-			<div
-				class={cn(
-					'h-[466px] min-w-max rounded-md  ',
-					typeof classNames.table === 'function' ? classNames.table() : classNames.table
-				)}
-			>
-				<!-- THEAD -->
+			<div class={cn(enableColumnReordering || enableColumnVisiblitySelect ? 'pb-2' : '')}>
+				<div class="flex  justify-between gap-2 sm:flex-row flex-wrap">
+					<div>
+						<slot name="actions" />
+					</div>
+					<div class="flex flex-row items-center gap-2 self-end flex-wrap ">
+						{#if enableColumnReordering}
+							<ColumnOrderDraggableChanger columns={columnsStore} />
+						{/if}
+						{#if enableColumnVisiblitySelect}
+							<ColumnVisibilitySelect {columns} hidden={hiddenColumns} />
+						{/if}
+						{#if enableFullscreenMode}
+							<FullscreenModeToggle {fullscreenMode} {target} />
+						{/if}
+					</div>
+				</div>
 				<div>
-					<!-- TR -->
-					<div
-						class={cn(
-							'flex flex-row gap-2 overflow-hidden border-b-[1px] hover:bg-accent/50',
-							typeof classNames.th === 'function' ? classNames.th() : classNames.th
-						)}
-					>
-						{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
-							<!-- TH -->
-							<div
-								class="text-md group flex font-semibold first:pl-2 last:grow last:pr-2"
-								style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
-								class:justify-start={column?.config?.align == 'left'}
-								class:justify-center={column?.config?.align == 'center'}
-								class:justify-end={column?.config?.align == 'right'}
-							>
-								<div class="flex items-center gap-2 overflow-clip truncate py-2">
-									{#if column.headerCell}
+					<slot name="filters" />
+				</div>
+			</div>
+			<div class={cn(' w-full border border-t-0', enablePagination && 'mb-2')}>
+				<Table.Root
+					class={cn(
+						'h-[500px] w-fit',
+						typeof classNames.table === 'function' ? classNames.table() : classNames.table
+					)}
+				>
+					<Table.Header class="sticky top-0 bg-primary-foreground">
+						<Table.Row
+							class={cn('', typeof classNames.th === 'function' ? classNames.th() : classNames.th)}
+						>
+							{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
+								<Table.Head
+									class={cn('group flex flex-row gap-1', column.head?.class)}
+									style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
+								>
+									{#if typeof column?.head?.component === 'string' || typeof column.head?.component === 'number'}
+										<span class="truncate text-nowrap">
+											{column.head.component}
+										</span>
+									{:else if column.head?.component}
 										<svelte:component
-											this={column.headerCell}
+											this={column.head.component}
 											props={{
 												column
 											}}
 										/>
-									{:else}
-										<span class=" truncate text-nowrap">
+									{:else if column.header}
+										<span class="truncate text-nowrap">
 											{column.header}
 										</span>
 									{/if}
-									{#if column && column?.config?.sortable !== false && enableSorting}
-										<SortingToggle {column} {sorting} />
-									{/if}
-								</div>
-								{#if column.config?.resizable != false && enableResizing}
-									<div
-										class="ml-auto hidden h-full w-1 cursor-col-resize bg-foreground group-hover:flex"
-										use:resize={{ accessor: column.accessor }}
-									/>
-								{/if}
-							</div>
-						{/each}
-					</div>
-				</div>
-				<!-- TBODY -->
-
-				{#if enableVirtualization}
-					<div class="shadow-xs h-[400px] overflow-auto" bind:this={virtualListEl}>
-						<div style="position: relative; height: {$virtualizer.getTotalSize()}px; width: 100%;">
-							<div
-								style="position: absolute; top: 0; left: 0; width: 100%; transform: translateY({items[0]
-									? items[0].start
-									: 0}px);"
-							>
-								{#each items as row, idx (row.index)}
-									{@const dataRow = data[row.index]}
-									{@const dataIndex = row.index}
-									<!-- row -->
-									<div
-										bind:this={virtualItemEls[idx]}
-										data-index={row.index}
-										class="flex-col items-center justify-center border-b-[1px] last:border-b-0"
-									>
-										<div
-											class={cn(
-												'group flex h-10 flex-row items-center gap-x-2 border-b-[1px] border-border last:border-b-0 hover:bg-accent/50',
-												typeof classNames.row === 'function' ? classNames.row(row) : classNames.row
-											)}
-										>
-											{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column}
-												<!-- TD -->
+									<div class="flex w-fit flex-row gap-1">
+											{#if column && column?.config?.sortable !== false && enableSorting}
+											<SortingToggle {column} {sorting} />
+											{/if}
+											{#if column.config?.resizable != false && enableResizing}
 												<div
-													class={cn(
-														' truncate text-nowrap first:pl-2 last:grow last:pr-2',
-														typeof classNames.cell === 'function'
-															? classNames.cell(row, column)
-															: classNames.cell
-													)}
-													style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor)
-														.w}px"
-													class:text-start={column?.config?.align == 'left'}
-													class:text-center={column?.config?.align == 'center'}
-													class:text-end={column?.config?.align == 'right'}
-												>
-													{#if $inlineEditing.includes(dataRow.id)}
-														<CellEditableTemplate row={dataRow} rowIndex={dataIndex} {column} />
-													{:else}
-														<CellTemplate row={dataRow} rowIndex={dataIndex} {column} />
-													{/if}
-												</div>
-											{/each}
-										</div>
-										{#if $expandedRows.includes(dataRow.id)}
-											<div class=" bg-expandedTableContent h-full w-full">
-												<slot
-													name="expandedRowContent"
-													props={{
-														row: dataRow,
-														rowIndex: dataIndex
-													}}
+													class="hidden h-full min-w-1 cursor-col-resize self-end justify-self-end bg-foreground group-hover:flex"
+													use:resize={{ accessor: column.accessor }}
 												/>
-											</div>
-										{/if}
-									</div>
-								{/each}
-							</div>
+											{/if}
+										</div>
+								</Table.Head>
+							{/each}
+						</Table.Row>
+					</Table.Header>
+					{#if enableVirtualization}
+						<div class="h-[500px] overflow-y-auto overflow-x-hidden" bind:this={virtualListEl}>
+							<Table.Body style=" height: {$virtualizer.getTotalSize()}px" class={cn('relative')}>
+								<div
+									style="position: absolute; top: 0; left: 0; width: 100%; transform: translateY({items[0]
+										? items[0].start
+										: 0}px);"
+								>
+									{#each items as row, idx (row.index)}
+										{@const dataRow = data[row.index]}
+										{@const dataIndex = row.index}
+										<div bind:this={virtualItemEls[idx]} data-index={row.index}>
+											<Table.Row
+												class={cn(
+													'group',
+													typeof classNames.row === 'function'
+														? classNames.row({ row, rowIndex: dataIndex })
+														: classNames.row
+												)}
+											>
+												{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
+													<Table.Cell
+														class={cn(
+															'',
+															typeof classNames.cell === 'function'
+																? classNames.cell({ row, column, columnIndex })
+																: classNames.cell,
+															typeof column?.cell?.class === 'function'
+																? column?.cell?.class({ row, column, columnIndex })
+																: column?.cell?.class
+														)}
+														style="width: {$columnSizes.find(
+															(obj) => obj.accessor == column.accessor
+														).w}px"
+													>
+														{#if $inlineEditing.includes(dataRow.id)}
+															<CellEditableTemplate row={dataRow} rowIndex={dataIndex} {column} />
+														{:else}
+															<CellTemplate row={dataRow} rowIndex={dataIndex} {column} />
+														{/if}
+													</Table.Cell>
+												{/each}
+											</Table.Row>
+											{#if $expandedRows.includes(dataRow.id)}
+												<Table.Row class="h-full w-full">
+													<slot
+														name="expandedRowContent"
+														props={{
+															row: dataRow,
+															rowIndex: dataIndex
+														}}
+													/>
+												</Table.Row>
+											{/if}
+										</div>
+									{/each}
+								</div>
+							</Table.Body>
 						</div>
-					</div>
-				{:else if !enableVirtualization}
-					<div class="flex flex-col">
-						{#if !loading && data.length < 1}
-							<!-- TR -->
-							<div>
-								<!-- TD -->
-								<div class="flex">
-									<div class="flex flex-col items-center justify-center">
-										<FolderX class="size-10 text-muted-foreground" strokeWidth={1} />
-										<p class="text-md text-muted-foreground">No data found</p>
-									</div>
-								</div>
-							</div>
-						{/if}
-						{#each $visibleRows as row, rowIndex}
-							<!-- TR -->
-							<div
-								class={cn(
-									'group flex h-10 flex-row items-center gap-x-2 border-b-[1px] border-border last:border-b-0 hover:bg-accent/50',
-									typeof classNames.row === 'function' ? classNames.row(row) : classNames.row
-								)}
-							>
-								{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column}
-									<!-- TD -->
-									<div
-										class={cn(
-											' truncate text-nowrap first:pl-2 last:grow last:pr-2',
-											typeof classNames.cell === 'function'
-												? classNames.cell(row, column)
-												: classNames.cell
-										)}
-										style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
-										class:text-start={column?.config?.align == 'left'}
-										class:text-center={column?.config?.align == 'center'}
-										class:text-end={column?.config?.align == 'right'}
-									>
-										{#if $inlineEditing.includes(row.id)}
-											<CellEditableTemplate {row} {rowIndex} {column} />
-										{:else}
-											<CellTemplate {row} {rowIndex} {column} />
-										{/if}
-									</div>
-								{/each}
-
-								<!-- class:bg-red-400={row.id == 4} -->
-							</div>
-							{#if $expandedRows.includes(row.id)}
-								<div class=" bg-expandedTableContent h-full w-full">
-									<slot
-										name="expandedRowContent"
-										props={{
-											row,
-											rowIndex
-										}}
-									/>
-								</div>
+					{:else if !enableVirtualization}
+						<Table.Body class="flex flex-col">
+							{#if !loading && data.length < 1}
+								<Table.Row>
+									<Table.Cell class="flex">
+										<div class="flex flex-col items-center justify-center">
+											<FolderX class="size-10 text-muted-foreground" strokeWidth={1} />
+											<p class="text-md text-muted-foreground">No data found</p>
+										</div>
+									</Table.Cell>
+								</Table.Row>
 							{/if}
-						{/each}
-					</div>
-				{/if}
+
+							{#each $visibleRows as row, rowIndex}
+								<Table.Row
+									class={cn(
+										'group',
+										typeof classNames.row === 'function'
+											? classNames.row({ row, rowIndex })
+											: classNames.row
+									)}
+								>
+									{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
+										<Table.Cell
+											class={cn(
+												'',
+												typeof classNames.cell === 'function'
+													? classNames.cell({ row, column, columnIndex })
+													: classNames.cell,
+												typeof column?.cell?.class === 'function'
+													? column?.cell?.class({ row, column, columnIndex })
+													: column?.cell?.class
+											)}
+											style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor)
+												.w}px"
+										>
+											{#if $inlineEditing.includes(row.id)}
+												<CellEditableTemplate {row} {rowIndex} {column} />
+											{:else}
+												<CellTemplate {row} {rowIndex} {column} />
+											{/if}
+										</Table.Cell>
+									{/each}
+								</Table.Row>
+								{#if $expandedRows.includes(row.id)}
+									<Table.Row class="h-full w-full">
+										<slot
+											name="expandedRowContent"
+											props={{
+												row,
+												rowIndex
+											}}
+										/>
+									</Table.Row>
+								{/if}
+							{/each}
+						</Table.Body>
+					{/if}
+				</Table.Root>
 			</div>
+			{#if enablePagination}
+				<Pagination bind:count bind:perPage bind:page />
+			{/if}
 		</div>
 	</div>
-	{#if enablePagination}
-		<Pagination bind:count bind:perPage bind:page />
-	{/if}
 </div>
-
-<!-- </div>
-</div> -->

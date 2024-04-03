@@ -26,7 +26,9 @@
 		{
 			accessor: 'title',
 			header: 'Title',
-			cell: TextInputEditableCell,
+			cell: {
+				component: TextInputEditableCell
+			},
 			extra: {
 				onChange: (v) => console.log(v)
 			},
@@ -39,10 +41,12 @@
 		{
 			accessor: 'description',
 			header: 'Description',
-			cell: DescriptionCell
+			cell: {
+				component: DescriptionCell
+			}
 		},
-		{ accessor: 'brand', header: 'Brand', cell: BrandCell },
-		{ accessor: 'rating', header: 'Rating', cell: RatingCell }
+		{ accessor: 'brand', header: 'Brand', cell: { component: BrandCell } },
+		{ accessor: 'rating', header: 'Rating', cell: { component: RatingCell } }
 	];
 </script>
 

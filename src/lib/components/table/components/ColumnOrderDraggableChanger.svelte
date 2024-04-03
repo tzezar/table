@@ -9,6 +9,7 @@
 	import { cubicIn } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import { GripHorizontal } from 'lucide-svelte';
+	import { cn } from '$lib/utils';
 
 	const flipDurationMs = 50;
 	function handleDndConsider(e) {
@@ -21,12 +22,12 @@
 
 <Popover.Root>
 	<Popover.Trigger asChild let:builder>
-		<Button builders={[builder]} variant="outline">Order</Button>
+		<Button builders={[builder]} variant="outline" class='grow'>Order</Button>
 	</Popover.Trigger>
 	<Popover.Content>
 		<div class="">
 			<section
-				class="flex flex-col gap-2"
+				class="flex flex-col"
 				use:dndzone={{
 					items: $columns,
 					flipDurationMs,
@@ -39,17 +40,17 @@
 					<!-- class:hidden={item.config.hideable == false} -->
 					<div
 						animate:flip={{ duration: flipDurationMs }}
-						class="item text-md flex flex-row items-center justify-between rounded-sm border-[1px] border-solid border-border px-2 py-1 font-medium"
+						class={cn("item text-md flex flex-row items-center justify-between rounded-sm border-solid border-border px-2 font-medium", item.config.moveable != false && 'py-1 border-[1px] mb-2')}
 					>
-						<!-- {#if item.config.moveable != false} -->
-						{item.header}
-						<GripHorizontal size={18} />
-						{#if item[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
-							<div in:fade={{ duration: 200, easing: cubicIn }}>
-								{item.header}
-							</div>
+						{#if item.config.moveable != false}
+							{item.header}
+							<GripHorizontal size={18} />
+							{#if item[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
+								<div in:fade={{ duration: 200, easing: cubicIn }}>
+									{item.header}
+								</div>
+							{/if}
 						{/if}
-						<!-- {/if} -->
 					</div>
 				{/each}
 				<p class="text-center text-sm text-foreground/70">

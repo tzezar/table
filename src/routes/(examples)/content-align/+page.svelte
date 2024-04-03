@@ -17,8 +17,11 @@
 		{
 			accessor: 'id',
 			header: 'Id',
-			config: {
-				align: 'center'
+			head: {
+				class: 'justify-end flex'
+			},
+			cell: {
+				class: 'text-right'
 			}
 		},
 		{
@@ -28,6 +31,12 @@
 				size: {
 					w: 200
 				}
+			},
+			head: {
+				class: 'justify-center flex'
+			},
+			cell: {
+				class: 'text-center'
 			}
 		},
 		{
@@ -43,8 +52,11 @@
 		{
 			accessor: 'rating',
 			header: 'Rating',
-			config: {
-				align: 'right'
+			head: {
+				class: 'justify-end flex'
+			},
+			cell: {
+				class: 'text-right'
 			}
 		}
 	];

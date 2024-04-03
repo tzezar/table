@@ -5,34 +5,34 @@
 	export let column: Column;
 	export let row: any;
 	export let rowIndex: number;
+
+	let value;
+	$: {
+		if (column.accessor.includes('.')) {
+			value = getNestedValue(row, column.accessor);
+		} else {
+			value = row[column.accessor];
+		}
+		row;
+	}
 </script>
 
-{#if column?.cellEdit}
-	{#if column.accessor.includes('.')}
-		<svelte:component
-			this={column?.cellEdit}
-			props={{
-				value: getNestedValue(row, column.accessor),
-				column,
-				row,
-				rowIndex
-			}}
-		/>
+{#if !column.cell?.componentEditable}
+	{#if getNestedValue(row, column.accessor) !== undefined}
+		{getNestedValue(row, column.accessor)}
 	{:else}
-		<svelte:component
-			this={column?.cellEdit}
-			props={{
-				value: row[column.accessor],
-				column,
-				row,
-				rowIndex
-			}}
-		/>
+		{row[column.accessor]}
 	{/if}
-{:else if column.accessor.includes('.') && column?.cell !== undefined}
-	<!--  -->
-{:else if getNestedValue(row, column.accessor) !== undefined}
-	{getNestedValue(row, column.accessor)}
-{:else}
-	{row[column.accessor]}
+{:else if column.cell?.componentEditable}
+	<svelte:component
+		this={column?.cell?.componentEditable}
+		props={{
+			value,
+			column,
+			row,
+			rowIndex
+		}}
+	/>
+{:else if column?.cell?.simplified}
+	{@html column.cell.simplified({ column, row, rowIndex, value })}
 {/if}

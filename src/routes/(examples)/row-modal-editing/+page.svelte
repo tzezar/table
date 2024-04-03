@@ -36,8 +36,10 @@
 		{
 			accessor: 'editInModal',
 			header: '',
-			cell: EditModal,
-			cellEdit: EditModal,
+			cell: {
+				component: EditModal,
+				componentEditable: EditModal
+			},
 			extra: {
 				// onChange: ({ value, id }: Props) =>
 				// 	$updateMutation.mutate({ value, id, accessor: 'purchaseTaxRate' })
