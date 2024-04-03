@@ -83,7 +83,7 @@
 			},
 			head: {
 				component: HeaderSelectCheckbox,
-				class: `items-center align-middle justify-center`
+				class: `items-center align-middle justify-start`
 			}
 		},
 		{
