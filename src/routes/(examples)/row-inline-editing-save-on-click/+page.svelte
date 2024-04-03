@@ -90,7 +90,7 @@
 			},
 			cell: {
 				component: SelectBrand
-			}
+			},
 			// remember to pass rows
 			extra: {
 				rows
