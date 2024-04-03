@@ -223,7 +223,7 @@
 			<div class={cn(' w-full border border-t-0', enablePagination && 'mb-2')}>
 				<Table.Root
 					class={cn(
-						'h-[500px] w-fit',
+						'h-[500px] w-full',
 						typeof classNames.table === 'function' ? classNames.table() : classNames.table
 					)}
 				>
@@ -233,7 +233,7 @@
 						>
 							{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
 								<Table.Head
-									class={cn('group flex flex-row gap-1', column.head?.class)}
+									class={cn('group flex flex-row gap-1 last:grow', column.head?.class)}
 									style="width: {$columnSizes.find((obj) => obj.accessor == column.accessor).w}px"
 								>
 									{#if typeof column?.head?.component === 'string' || typeof column.head?.component === 'number'}
@@ -290,7 +290,7 @@
 												{#each $columnsStore.filter((c) => !$hiddenColumns.includes(c.accessor)) as column, columnIndex}
 													<Table.Cell
 														class={cn(
-															'',
+															'last:grow',
 															typeof classNames.cell === 'function'
 																? classNames.cell({ row, column, columnIndex })
 																: classNames.cell,
