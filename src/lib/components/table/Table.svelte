@@ -223,7 +223,7 @@
 			<div class={cn(' w-full border border-t-0', enablePagination && 'mb-2')}>
 				<Table.Root
 					class={cn(
-						'h-[500px] w-full',
+						'h-[500px] w-full min-w-max',
 						typeof classNames.table === 'function' ? classNames.table() : classNames.table
 					)}
 				>
