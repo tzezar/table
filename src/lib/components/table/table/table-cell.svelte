@@ -10,7 +10,7 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class={cn("px-2 py-3 align-middle", className)}
+	class={cn("px-2 py-3 align-middle last:grow", className)}
 	{...$$restProps}
 	on:click
 	on:keydown
