@@ -78,7 +78,7 @@
 <p class="pb-6 leading-7">
 	I rebuilt the shadcn table to use divs (easier styling, ability to change width, no weird
 	behaviour) and used them in the component. It made component cleaner and easier to read. You don't
-	have to overwrite it, just rename the folder and import in the component and you can have both the
+	have to overwrite it, you can have both the
 	official shadcn version and the one for the component built with divs.
 
 	<a href="https://github.com/tzezar/table/tree/main/src/lib/components/table/table">
