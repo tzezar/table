@@ -10,6 +10,6 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class={cn('flex flex-col w-full border-t drop-shadow-md', className)} {...$$restProps} on:click on:keydown>
+<div class={cn('flex flex-col w-full border-t shadow-sm', className)} {...$$restProps} on:click on:keydown>
 	<slot />
 </div>
