@@ -227,7 +227,7 @@
 						typeof classNames.table === 'function' ? classNames.table() : classNames.table
 					)}
 				>
-					<Table.Header class="sticky top-0 min-w-fit">
+					<Table.Header class="sticky top-0 min-w-fit bg-background">
 						<Table.Row
 							class={cn('', typeof classNames.th === 'function' ? classNames.th() : classNames.th)}
 						>
