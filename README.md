@@ -1,5 +1,45 @@
 # TZEZAR's TABLE
 
+> **Archived and No Longer Maintained**
+
+This project has been archived and is no longer actively maintained. It is provided as-is, and no further updates, bug fixes, or new features will be added.
+
+## Status
+
+- **Archived**: The repository is in an archived state and is no longer actively developed or supported.
+- **No active support**: No further issues will be addressed, and pull requests will not be merged.
+
+## Usage
+
+You are welcome to fork or clone the repository if you wish to continue using or contributing to it. However, please be aware that there will be no official updates or support from the maintainers.
+
+## Alternatives
+
+If you're looking for actively maintained alternatives, you might consider [Tzezar's Datagrid](https://datagrid.tzezar.pl/) built with svelte 5.
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+...\
+---
+
+
+
 Table component built in svelte based on shadcn-svelte components.
 
 [documentation, examples and live demo](https://tzezar-table.vercel.app/)
